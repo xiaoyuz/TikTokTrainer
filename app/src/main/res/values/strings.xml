@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TikTokTrainer</string>
+    <string name="button_simple_time_mode">简单计时模式</string>
+    <string name="button_simple_count_mode">简单计数模式</string>
+    <string name="button_custom_mode">自定义模式</string>
+    <string name="button_start">开始</string>
+
+    <string name="tv_setting_round_time">每轮时间</string>
+    <string name="tv_setting_rest_time">间隔时间</string>
+    <string name="tv_setting_count">组数</string>
 </resources>

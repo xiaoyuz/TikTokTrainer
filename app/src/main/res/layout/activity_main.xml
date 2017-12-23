@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context="xiaoyuz.com.tiktoktrainer.activity.MainActivity">
 
-
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </android.support.constraint.ConstraintLayout>

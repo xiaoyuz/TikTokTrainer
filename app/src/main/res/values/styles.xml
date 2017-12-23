@@ -8,4 +8,32 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MainFrameButtonStyle">
+        <item name="android:layout_width">@dimen/main_frame_button_width</item>
+        <item name="android:layout_height">@dimen/main_frame_button_height</item>
+        <item name="android:layout_margin">@dimen/main_frame_button_margin</item>
+    </style>
+
+    <style name="SettingFrameTextViewStyle">
+        <item name="android:layout_width">@dimen/setting_frame_tv_width</item>
+        <item name="android:layout_height">@dimen/setting_frame_tv_height</item>
+        <item name="android:layout_margin">@dimen/setting_frame_margin</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="SettingFrameNumberPickStyle">
+        <item name="android:layout_width">@dimen/setting_frame_number_picker_width</item>
+        <item name="android:layout_height">@dimen/setting_frame_number_picker_height</item>
+    </style>
+
+    <style name="SettingFrameItemStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/setting_item_border</item>
+    </style>
 </resources>
