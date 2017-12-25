@@ -19,7 +19,7 @@ class TimeModeSettingPresenter(private val mView: TimeModeSettingContract.View) 
         val roundTime = roundTimeValues[roundTimeIndex].toInt()
         val restTime = restTimeValues[restTimeIndex].toInt()
         val schedules = mutableListOf<TrainingSchedule>()
-        for (i in 0..count) {
+        for (i in 0..count - 1) {
             schedules.add(TrainingSchedule(mode = Mode.TIME_MODE, type = ScheduleType.FIGHTING,
                     time = roundTime))
             schedules.add(TrainingSchedule(mode = Mode.TIME_MODE, type = ScheduleType.REST,

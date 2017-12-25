@@ -6,11 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="center">
 
-    <Chronometer
-        android:id="@+id/chronometer"
+    <TextView
+        android:id="@+id/timerTv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:textSize="40sp"
-        android:textColor="@android:color/holo_red_light"/>
+        android:layout_height="wrap_content" />
 </RelativeLayout>
