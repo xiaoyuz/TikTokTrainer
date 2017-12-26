@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import xiaoyuz.com.tiktoktrainer.R
+import xiaoyuz.com.tiktoktrainer.contract.presenter.MainPresenter
 import xiaoyuz.com.tiktoktrainer.contract.view.MainFragment
 import xiaoyuz.com.tiktoktrainer.utils.addFragment
 
@@ -12,8 +13,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        MainFragment().also { addFragment(it) }
+        MainFragment().also {
+            MainPresenter(it)
+            addFragment(it)
+        }
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

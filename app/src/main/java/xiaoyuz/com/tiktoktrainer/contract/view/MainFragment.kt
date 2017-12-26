@@ -11,13 +11,12 @@ import xiaoyuz.com.tiktoktrainer.R
 import xiaoyuz.com.tiktoktrainer.constants.Mode
 import xiaoyuz.com.tiktoktrainer.contract.MainContract
 import xiaoyuz.com.tiktoktrainer.contract.presenter.MainPresenter
+import xiaoyuz.com.tiktoktrainer.contract.presenter.TimeModeSettingPresenter
 import xiaoyuz.com.tiktoktrainer.utils.addFragment
 
 class MainFragment : Fragment(), MainContract.View {
 
-    override var presenter: MainContract.Presenter
-        get() = MainPresenter(this)
-        set(value) {}
+    override lateinit var presenter: MainContract.Presenter
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         time.setOnClickListener { presenter.toModeSetting(Mode.TIME_MODE) }
@@ -31,7 +30,10 @@ class MainFragment : Fragment(), MainContract.View {
 
     override fun toSettingFragment(mode: Mode) {
         when (mode) {
-            Mode.TIME_MODE -> (activity as AppCompatActivity).addFragment(TimeModeSettingFragment())
+            Mode.TIME_MODE -> TimeModeSettingFragment().also {
+                TimeModeSettingPresenter(it)
+                (activity as AppCompatActivity).addFragment(it)
+            }
         }
     }
 }

@@ -1,13 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/timerTv"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/turnCountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/progress"
+            android:layout_alignRight="@id/progress"
+            android:gravity="center"
+            android:textSize="40sp"/>
+
+        <xiaoyuz.com.tiktoktrainer.widget.ColorArcProgressBar
+            android:id="@+id/progress"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_below="@id/turnCountTv"
+            app:is_need_content="true"
+            app:front_width="8dp"
+            app:total_engle="360" />
+
+        <TextView
+            android:id="@+id/statusTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/progress"
+            android:layout_alignRight="@id/progress"
+            android:layout_below="@id/progress"
+            android:gravity="center"
+            android:textSize="40sp"/>
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/pauseButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_media_pause" />
+</android.support.design.widget.CoordinatorLayout>

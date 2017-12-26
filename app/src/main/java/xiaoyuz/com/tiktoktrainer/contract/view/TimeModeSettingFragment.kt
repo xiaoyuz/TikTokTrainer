@@ -12,15 +12,13 @@ import xiaoyuz.com.tiktoktrainer.R
 import xiaoyuz.com.tiktoktrainer.constants.restTimeValues
 import xiaoyuz.com.tiktoktrainer.constants.roundTimeValues
 import xiaoyuz.com.tiktoktrainer.contract.TimeModeSettingContract
-import xiaoyuz.com.tiktoktrainer.contract.presenter.TimeModeSettingPresenter
+import xiaoyuz.com.tiktoktrainer.contract.presenter.TrainingPresenter
 import xiaoyuz.com.tiktoktrainer.domain.TrainingSchedule
 import xiaoyuz.com.tiktoktrainer.utils.addFragment
 
 class TimeModeSettingFragment : Fragment(), TimeModeSettingContract.View {
 
-    override var presenter: TimeModeSettingContract.Presenter
-        get() = TimeModeSettingPresenter(this)
-        set(value) {}
+    override lateinit var presenter: TimeModeSettingContract.Presenter
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         initNumberPicks()
@@ -53,11 +51,17 @@ class TimeModeSettingFragment : Fragment(), TimeModeSettingContract.View {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.subscribe()
+    }
+
     override fun toTrainingFragment(schedules: List<TrainingSchedule>) {
         val schedulesJsonStr = Gson().toJson(schedules)
         val trainingFragment = TrainingFragment().apply {
             arguments = Bundle().apply { putString("schedules", schedulesJsonStr) }
         }
+        TrainingPresenter(trainingFragment)
         (activity as AppCompatActivity).addFragment(trainingFragment)
     }
 }

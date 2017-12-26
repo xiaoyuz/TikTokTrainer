@@ -9,6 +9,10 @@ import xiaoyuz.com.tiktoktrainer.domain.TrainingSchedule
 
 class TimeModeSettingPresenter(private val mView: TimeModeSettingContract.View) : TimeModeSettingContract.Presenter {
 
+    init {
+        mView.presenter = this
+    }
+
     override fun subscribe() {
     }
 
