@@ -1,59 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_setting_background"
+        android:gravity="center">
 
-    <LinearLayout
-        android:id="@+id/layout_round_time"
-        style="@style/SettingFrameItemStyle">
+        <LinearLayout
+            android:id="@+id/layout_round_time"
+            style="@style/SettingFrameItemStyle">
 
-        <TextView
-            style="@style/SettingFrameTextViewStyle"
-            android:text="@string/tv_setting_round_time" />
+            <TextView
+                style="@style/SettingFrameTextViewStyle"
+                android:text="@string/tv_setting_round_time" />
 
-        <xiaoyuz.com.tiktoktrainer.widget.TrainerNumberPicker
-            android:id="@+id/roundTime"
-            style="@style/SettingFrameNumberPickStyle" />
-    </LinearLayout>
+            <xiaoyuz.com.tiktoktrainer.widget.TrainerNumberPicker
+                android:id="@+id/roundTime"
+                style="@style/SettingFrameNumberPickStyle" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_rest_time"
-        style="@style/SettingFrameItemStyle"
-        android:layout_below="@id/layout_round_time">
+        <LinearLayout
+            android:id="@+id/layout_rest_time"
+            style="@style/SettingFrameItemStyle"
+            android:layout_below="@id/layout_round_time">
 
-        <TextView
-            style="@style/SettingFrameTextViewStyle"
-            android:text="@string/tv_setting_rest_time" />
+            <TextView
+                style="@style/SettingFrameTextViewStyle"
+                android:text="@string/tv_setting_rest_time" />
 
-        <xiaoyuz.com.tiktoktrainer.widget.TrainerNumberPicker
-            android:id="@+id/restTime"
-            style="@style/SettingFrameNumberPickStyle" />
-    </LinearLayout>
+            <xiaoyuz.com.tiktoktrainer.widget.TrainerNumberPicker
+                android:id="@+id/restTime"
+                style="@style/SettingFrameNumberPickStyle" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_count"
-        style="@style/SettingFrameItemStyle"
-        android:layout_below="@id/layout_rest_time">
+        <LinearLayout
+            android:id="@+id/layout_count"
+            style="@style/SettingFrameItemStyle"
+            android:layout_below="@id/layout_rest_time">
 
-        <TextView
-            style="@style/SettingFrameTextViewStyle"
-            android:text="@string/tv_setting_count" />
+            <TextView
+                style="@style/SettingFrameTextViewStyle"
+                android:text="@string/tv_setting_count" />
 
-        <xiaoyuz.com.tiktoktrainer.widget.TrainerNumberPicker
-            android:id="@+id/count"
-            style="@style/SettingFrameNumberPickStyle" />
-    </LinearLayout>
+            <xiaoyuz.com.tiktoktrainer.widget.TrainerNumberPicker
+                android:id="@+id/count"
+                style="@style/SettingFrameNumberPickStyle" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/start"
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@id/layout_count"
-        android:layout_alignLeft="@id/layout_count"
-        android:layout_below="@id/layout_count"
-        android:text="@string/button_start"/>
-
-</RelativeLayout>
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_media_play" />
+</android.support.design.widget.CoordinatorLayout>

@@ -6,9 +6,11 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/backgroundLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="@color/color_get_ready_background">
 
         <TextView
             android:id="@+id/turnCountTv"

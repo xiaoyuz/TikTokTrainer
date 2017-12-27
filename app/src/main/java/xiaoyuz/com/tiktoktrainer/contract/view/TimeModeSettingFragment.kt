@@ -22,7 +22,7 @@ class TimeModeSettingFragment : Fragment(), TimeModeSettingContract.View {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         initNumberPicks()
-        start.setOnClickListener {
+        startButton.setOnClickListener {
             presenter.start(roundTime.value, restTime.value, count.value)
         }
     }

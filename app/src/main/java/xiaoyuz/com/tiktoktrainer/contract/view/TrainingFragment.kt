@@ -4,12 +4,14 @@ import android.media.AudioManager
 import android.media.ToneGenerator
 import android.os.*
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_training.*
 import xiaoyuz.com.tiktoktrainer.R
+import xiaoyuz.com.tiktoktrainer.constants.ProgressStatus
 import xiaoyuz.com.tiktoktrainer.constants.ScheduleType
 import xiaoyuz.com.tiktoktrainer.contract.TrainingContract
 import xiaoyuz.com.tiktoktrainer.domain.ScheduleItem
@@ -48,17 +50,28 @@ class TrainingFragment : Fragment(), TrainingContract.View {
         presenter.cancelTicTok()
     }
 
-    override fun ticTokProgress(scheduleItem: ScheduleItem, status: String) {
+    override fun ticTokProgress(scheduleItem: ScheduleItem, status: ProgressStatus) {
         val (time, turn, schedule) = scheduleItem
         progress.setMaxValues(schedule.time!!.toFloat())
         progress.setCurrentValues(time.toFloat())
         turnCountTv.text = turn.toString()
-        statusTv.text = status
+        statusTv.text = when (status) {
+            ProgressStatus.WORK_OUT -> resources.getString(R.string.status_work_out)
+            ProgressStatus.REST_NOW -> resources.getString(R.string.status_rest_now)
+            ProgressStatus.PAUSE -> resources.getString(R.string.status_pause)
+        }
+        backgroundLayout.setBackgroundResource(when (status) {
+            ProgressStatus.WORK_OUT -> R.color.color_work_out_background
+            ProgressStatus.REST_NOW -> R.color.color_rest_now_background
+            ProgressStatus.PAUSE -> R.color.color_get_ready_background
+        })
         tikTokAlarm(schedule)
     }
 
-    override fun updatePauseButton() {
+    override fun onProgressPause() {
         pauseButton.setImageResource(if (mPause) android.R.drawable.ic_media_play else android.R.drawable.ic_media_pause)
+        statusTv.text = resources.getString(R.string.status_pause)
+        backgroundLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.color_get_ready_background))
     }
 
     private fun tikTokAlarm(schedule: TrainingSchedule) {
