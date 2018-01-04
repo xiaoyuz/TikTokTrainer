@@ -55,16 +55,17 @@ class TrainingFragment : Fragment(), TrainingContract.View {
     override fun ticTokProgress(scheduleItem: ScheduleItem?, status: ProgressStatus) {
         scheduleItem?.let {
             val (time, turn, schedule) = scheduleItem
-            schedule.time?.let { progress.setMaxValues(it.toFloat()) }
-            progress.setCurrentValues(time.toFloat())
-            turnCountTv.text = turn.toString()
-            statusTv.text = when (status) {
+            schedule.time?.let { progress?.setMaxValues(it.toFloat()) }
+            progress?.setCurrentValues(time.toFloat())
+            test?.text = time.toString()
+            turnCountTv?.text = turn.toString()
+            statusTv?.text = when (status) {
                 ProgressStatus.WORK_OUT -> resources.getString(R.string.status_work_out)
                 ProgressStatus.REST_NOW -> resources.getString(R.string.status_rest_now)
                 ProgressStatus.PAUSE -> resources.getString(R.string.status_pause)
                 ProgressStatus.GET_READY -> resources.getString(R.string.status_get_ready)
             }
-            backgroundLayout.setBackgroundResource(when (status) {
+            backgroundLayout?.setBackgroundResource(when (status) {
                 ProgressStatus.WORK_OUT -> R.color.color_work_out_background
                 ProgressStatus.REST_NOW -> R.color.color_rest_now_background
                 ProgressStatus.PAUSE -> R.color.color_get_ready_background
