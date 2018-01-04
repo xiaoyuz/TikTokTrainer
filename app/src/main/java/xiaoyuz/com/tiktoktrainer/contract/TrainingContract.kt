@@ -9,7 +9,7 @@ import xiaoyuz.com.tiktoktrainer.domain.TrainingSchedule
 interface TrainingContract {
 
     interface View : BaseView<Presenter> {
-        fun ticTokProgress(scheduleItem: ScheduleItem, status: ProgressStatus)
+        fun ticTokProgress(scheduleItem: ScheduleItem?, status: ProgressStatus)
 
         fun onProgressPause()
     }

@@ -24,6 +24,8 @@ class TrainingPresenter(private val mView: TrainingContract.View) : TrainingCont
             mView.ticTokProgress(it, ProgressStatus.WORK_OUT)
         }, restTikTokFunc = {
             mView.ticTokProgress(it, ProgressStatus.REST_NOW)
+        }, getReadyTiktokFunc = {
+            mView.ticTokProgress(it, ProgressStatus.GET_READY)
         })
         mTicTask.execute(schedules)
     }

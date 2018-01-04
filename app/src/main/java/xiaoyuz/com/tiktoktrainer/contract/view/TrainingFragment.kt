@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_training.*
 import xiaoyuz.com.tiktoktrainer.R
+import xiaoyuz.com.tiktoktrainer.constants.Mode
 import xiaoyuz.com.tiktoktrainer.constants.ProgressStatus
 import xiaoyuz.com.tiktoktrainer.constants.ScheduleType
 import xiaoyuz.com.tiktoktrainer.contract.TrainingContract
@@ -33,7 +34,8 @@ class TrainingFragment : Fragment(), TrainingContract.View {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         mSchedules = Gson().fromJson<List<TrainingSchedule>>(arguments.getString("schedules"))
-        presenter.startTicTok(mSchedules)
+        val allSchedules = listOf(TrainingSchedule(Mode.TIME_MODE, ScheduleType.GET_READY, 5)) + mSchedules
+        presenter.startTicTok(allSchedules)
         pauseButton.setOnClickListener {
             mPause = !mPause
             presenter.progressControlSet(mPause)
@@ -50,22 +52,26 @@ class TrainingFragment : Fragment(), TrainingContract.View {
         presenter.cancelTicTok()
     }
 
-    override fun ticTokProgress(scheduleItem: ScheduleItem, status: ProgressStatus) {
-        val (time, turn, schedule) = scheduleItem
-        progress.setMaxValues(schedule.time!!.toFloat())
-        progress.setCurrentValues(time.toFloat())
-        turnCountTv.text = turn.toString()
-        statusTv.text = when (status) {
-            ProgressStatus.WORK_OUT -> resources.getString(R.string.status_work_out)
-            ProgressStatus.REST_NOW -> resources.getString(R.string.status_rest_now)
-            ProgressStatus.PAUSE -> resources.getString(R.string.status_pause)
+    override fun ticTokProgress(scheduleItem: ScheduleItem?, status: ProgressStatus) {
+        scheduleItem?.let {
+            val (time, turn, schedule) = scheduleItem
+            schedule.time?.let { progress.setMaxValues(it.toFloat()) }
+            progress.setCurrentValues(time.toFloat())
+            turnCountTv.text = turn.toString()
+            statusTv.text = when (status) {
+                ProgressStatus.WORK_OUT -> resources.getString(R.string.status_work_out)
+                ProgressStatus.REST_NOW -> resources.getString(R.string.status_rest_now)
+                ProgressStatus.PAUSE -> resources.getString(R.string.status_pause)
+                ProgressStatus.GET_READY -> resources.getString(R.string.status_get_ready)
+            }
+            backgroundLayout.setBackgroundResource(when (status) {
+                ProgressStatus.WORK_OUT -> R.color.color_work_out_background
+                ProgressStatus.REST_NOW -> R.color.color_rest_now_background
+                ProgressStatus.PAUSE -> R.color.color_get_ready_background
+                ProgressStatus.GET_READY -> R.color.color_get_ready_background
+            })
+            tikTokAlarm(schedule)
         }
-        backgroundLayout.setBackgroundResource(when (status) {
-            ProgressStatus.WORK_OUT -> R.color.color_work_out_background
-            ProgressStatus.REST_NOW -> R.color.color_rest_now_background
-            ProgressStatus.PAUSE -> R.color.color_get_ready_background
-        })
-        tikTokAlarm(schedule)
     }
 
     override fun onProgressPause() {
@@ -77,8 +83,9 @@ class TrainingFragment : Fragment(), TrainingContract.View {
     private fun tikTokAlarm(schedule: TrainingSchedule) {
         mToneGen.startTone(
                 when (schedule.type) {
-                    ScheduleType.FIGHTING ->ToneGenerator.TONE_CDMA_PIP
-                    ScheduleType.REST ->ToneGenerator.TONE_CDMA_REORDER
+                    ScheduleType.GET_READY -> ToneGenerator.TONE_CDMA_REORDER
+                    ScheduleType.FIGHTING -> ToneGenerator.TONE_CDMA_PIP
+                    ScheduleType.REST -> ToneGenerator.TONE_CDMA_REORDER
                 }, 150)
     }
 }

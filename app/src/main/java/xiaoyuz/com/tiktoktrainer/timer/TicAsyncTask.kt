@@ -6,7 +6,8 @@ import xiaoyuz.com.tiktoktrainer.domain.ScheduleItem
 import xiaoyuz.com.tiktoktrainer.domain.TrainingSchedule
 
 class TicAsyncTask(val roundTikTokFunc: (ScheduleItem) -> Unit,
-                   val restTikTokFunc: (ScheduleItem) -> Unit) : AsyncTask<List<TrainingSchedule>, ScheduleItem, Unit>() {
+                   val restTikTokFunc: (ScheduleItem) -> Unit,
+                   val getReadyTiktokFunc: (ScheduleItem) -> Unit) : AsyncTask<List<TrainingSchedule>, ScheduleItem, Unit>() {
 
     private var mPause = false
 
@@ -42,6 +43,7 @@ class TicAsyncTask(val roundTikTokFunc: (ScheduleItem) -> Unit,
         when (scheduleItem.schedule.type) {
             ScheduleType.FIGHTING -> roundTikTokFunc(scheduleItem)
             ScheduleType.REST -> restTikTokFunc(scheduleItem)
+            ScheduleType.GET_READY -> getReadyTiktokFunc(scheduleItem)
         }
     }
 

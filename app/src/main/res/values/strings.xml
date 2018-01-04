@@ -12,4 +12,5 @@
     <string name="status_work_out">WORK OUT</string>
     <string name="status_rest_now">REST NOW</string>
     <string name="status_pause">PAUSE</string>
+    <string name="status_get_ready">GET READY</string>
 </resources>

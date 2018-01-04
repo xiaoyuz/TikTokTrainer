@@ -5,9 +5,9 @@ enum class Mode {
 }
 
 enum class ScheduleType {
-    REST, FIGHTING
+    GET_READY, REST, FIGHTING
 }
 
 enum class ProgressStatus {
-    WORK_OUT, REST_NOW, PAUSE
+    GET_READY, WORK_OUT, REST_NOW, PAUSE
 }
