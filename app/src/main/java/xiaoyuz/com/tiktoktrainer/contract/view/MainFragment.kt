@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import xiaoyuz.com.tiktoktrainer.R
 import xiaoyuz.com.tiktoktrainer.constants.Mode
 import xiaoyuz.com.tiktoktrainer.contract.MainContract
+import xiaoyuz.com.tiktoktrainer.contract.presenter.CountModeSettingPresenter
 import xiaoyuz.com.tiktoktrainer.contract.presenter.MainPresenter
 import xiaoyuz.com.tiktoktrainer.contract.presenter.TimeModeSettingPresenter
 import xiaoyuz.com.tiktoktrainer.utils.addFragment
@@ -32,6 +33,10 @@ class MainFragment : Fragment(), MainContract.View {
         when (mode) {
             Mode.TIME_MODE -> TimeModeSettingFragment().also {
                 TimeModeSettingPresenter(it)
+                (activity as AppCompatActivity).addFragment(it)
+            }
+            Mode.COUNT_MODE -> CountModeSettingFragment().also {
+                CountModeSettingPresenter(it)
                 (activity as AppCompatActivity).addFragment(it)
             }
         }

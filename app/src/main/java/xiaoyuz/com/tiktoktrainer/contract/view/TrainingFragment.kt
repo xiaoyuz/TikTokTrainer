@@ -54,9 +54,10 @@ class TrainingFragment : Fragment(), TrainingContract.View {
 
     override fun ticTokProgress(scheduleItem: ScheduleItem?, status: ProgressStatus) {
         scheduleItem?.let {
-            val (time, turn, schedule) = scheduleItem
-            schedule.time?.let {
-                count.text = "$time / $it"
+            val (num, turn, schedule) = scheduleItem
+            when (schedule.mode) {
+                Mode.TIME_MODE -> schedule.time?.let { count.text = "$num / $it" }
+                Mode.COUNT_MODE -> schedule.count?.let { count.text = "$num / $it" }
             }
             turnCountTv?.text = turn.toString()
             statusTv?.text = when (status) {
@@ -71,7 +72,9 @@ class TrainingFragment : Fragment(), TrainingContract.View {
                 ProgressStatus.PAUSE -> R.color.color_get_ready_background
                 ProgressStatus.GET_READY -> R.color.color_get_ready_background
             })
-            tikTokAlarm(schedule)
+            if (scheduleItem.tikSound) {
+                tikTokAlarm(schedule)
+            }
         }
     }
 

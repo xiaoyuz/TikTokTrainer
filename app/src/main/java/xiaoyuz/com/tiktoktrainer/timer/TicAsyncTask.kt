@@ -1,6 +1,7 @@
 package xiaoyuz.com.tiktoktrainer.timer
 
 import android.os.AsyncTask
+import xiaoyuz.com.tiktoktrainer.constants.Mode
 import xiaoyuz.com.tiktoktrainer.constants.ScheduleType
 import xiaoyuz.com.tiktoktrainer.domain.ScheduleItem
 import xiaoyuz.com.tiktoktrainer.domain.TrainingSchedule
@@ -12,11 +13,7 @@ class TicAsyncTask(val roundTikTokFunc: (ScheduleItem) -> Unit,
     private var mPause = false
 
     override fun doInBackground(vararg params: List<TrainingSchedule>) {
-        var index = 0
-        val scheduleItems = params[0].flatMap { schedule ->
-            index += 1
-            (0..schedule.time!!).map { ScheduleItem(it, index, schedule) }
-        }
+        val scheduleItems = genScheduleItems(params[0])
         var tikCount = 0
         try {
             while (!isCancelled) {
@@ -26,15 +23,29 @@ class TicAsyncTask(val roundTikTokFunc: (ScheduleItem) -> Unit,
                 if (tikCount >= scheduleItems.size) {
                     break
                 }
-                val (time, turn, schedule) = scheduleItems[tikCount]
+                val (num, turn, schedule) = scheduleItems[tikCount]
                 publishProgress(scheduleItems[tikCount])
                 tikCount += 1
-                if (time == schedule.time!! && schedule.type == ScheduleType.FIGHTING) {
-//                    roundFinish()
-                }
+//                if (num == schedule.time!! && schedule.type == ScheduleType.FIGHTING) {
+////                    roundFinish()
+//                }
                 Thread.sleep(1000)
             }
         } catch (e: Exception) {
+        }
+    }
+
+    private fun genScheduleItems(trainingSchedules: List<TrainingSchedule>): List<ScheduleItem> {
+        var index = 0
+        return trainingSchedules.flatMap { schedule ->
+            index += 1
+            when (schedule.mode) {
+                Mode.COUNT_MODE -> (0..schedule.count!!).flatMap { count ->
+                    (0..schedule.perTime!! - 1).mapIndexed { s, i -> ScheduleItem(count, index, schedule, i == 0) }
+                }
+                Mode.TIME_MODE -> (0..schedule.time!!).map { ScheduleItem(it, index, schedule, true) }
+                else -> emptyList()
+            }
         }
     }
 
