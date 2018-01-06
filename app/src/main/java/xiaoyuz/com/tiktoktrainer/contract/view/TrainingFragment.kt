@@ -55,9 +55,9 @@ class TrainingFragment : Fragment(), TrainingContract.View {
     override fun ticTokProgress(scheduleItem: ScheduleItem?, status: ProgressStatus) {
         scheduleItem?.let {
             val (time, turn, schedule) = scheduleItem
-            schedule.time?.let { progress?.setMaxValues(it.toFloat()) }
-            progress?.setCurrentValues(time.toFloat())
-            test?.text = time.toString()
+            schedule.time?.let {
+                count.text = "$time / $it"
+            }
             turnCountTv?.text = turn.toString()
             statusTv?.text = when (status) {
                 ProgressStatus.WORK_OUT -> resources.getString(R.string.status_work_out)

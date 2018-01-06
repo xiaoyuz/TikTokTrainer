@@ -12,39 +12,35 @@
         android:gravity="center"
         android:background="@color/color_get_ready_background">
 
-        <TextView
-            android:id="@+id/turnCountTv"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/progress"
-            android:layout_alignRight="@id/progress"
-            android:gravity="center"
-            android:textSize="40sp"/>
+            android:orientation="vertical">
 
-        <xiaoyuz.com.tiktoktrainer.widget.ColorArcProgressBar
-            android:id="@+id/progress"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_below="@id/turnCountTv"
-            app:is_need_content="true"
-            app:front_width="8dp"
-            app:total_engle="360" />
+            <TextView
+                android:id="@+id/turnCountTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:textSize="40sp"/>
 
-        <TextView
-            android:id="@+id/statusTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/progress"
-            android:layout_alignRight="@id/progress"
-            android:layout_below="@id/progress"
-            android:gravity="center"
-            android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:textSize="100sp"/>
 
-        <TextView
-            android:id="@+id/test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/statusTv"/>
+            <TextView
+                android:id="@+id/statusTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:textSize="40sp"/>
+        </LinearLayout>
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
