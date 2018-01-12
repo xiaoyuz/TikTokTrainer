@@ -59,6 +59,14 @@ class TrainingFragment : Fragment(), TrainingContract.View {
                 Mode.TIME_MODE -> schedule.time?.let { count.text = "$num / $it" }
                 Mode.COUNT_MODE -> schedule.count?.let { count.text = "$num / $it" }
             }
+            if (schedule.name != null) {
+                if (schedule.type == ScheduleType.FIGHTING) {
+                    eventName.text = schedule.name
+                    eventName.visibility = View.VISIBLE
+                }
+            } else {
+                eventName.visibility = View.GONE
+            }
             turnCountTv?.text = turn.toString()
             statusTv?.text = when (status) {
                 ProgressStatus.WORK_OUT -> resources.getString(R.string.status_work_out)

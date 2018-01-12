@@ -10,6 +10,7 @@
     <string name="tv_setting_count">组数</string>
     <string name="tv_setting_round_count">每轮次数</string>
     <string name="tv_setting_per_time">每次时间</string>
+    <string name="tv_setting_item_name">单项名称</string>
 
     <string name="status_work_out">WORK OUT</string>
     <string name="status_rest_now">REST NOW</string>
