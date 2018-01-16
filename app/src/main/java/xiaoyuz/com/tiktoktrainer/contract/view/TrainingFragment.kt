@@ -60,14 +60,20 @@ class TrainingFragment : Fragment(), TrainingContract.View {
                 Mode.COUNT_MODE -> schedule.count?.let { count.text = "$num / $it" }
             }
             if (schedule.name != null) {
-                if (schedule.type == ScheduleType.FIGHTING) {
-                    eventName.text = schedule.name
-                    eventName.visibility = View.VISIBLE
+                eventName.text = schedule.name
+                eventName.visibility = View.VISIBLE
+                val nextEvent = nextWorkOutSchedule(turn - 1)
+                if (nextEvent != null) {
+                    nextEventName.text = "NEXT: ${nextEvent.name}"
+                    nextEventName.visibility = View.VISIBLE
+                } else {
+                    nextEventName.visibility = View.GONE
                 }
             } else {
                 eventName.visibility = View.GONE
+                nextEventName.visibility = View.GONE
             }
-            turnCountTv?.text = turn.toString()
+            turnCountTv?.text = "${turn - 1} / ${mSchedules.size}"
             statusTv?.text = when (status) {
                 ProgressStatus.WORK_OUT -> resources.getString(R.string.status_work_out)
                 ProgressStatus.REST_NOW -> resources.getString(R.string.status_rest_now)
@@ -99,5 +105,16 @@ class TrainingFragment : Fragment(), TrainingContract.View {
                     ScheduleType.FIGHTING -> ToneGenerator.TONE_CDMA_PIP
                     ScheduleType.REST -> ToneGenerator.TONE_CDMA_REORDER
                 }, 150)
+    }
+
+    private fun nextWorkOutSchedule(turn: Int): TrainingSchedule? {
+        if (turn < mSchedules.size) {
+            for (i in turn..mSchedules.size - 1) {
+                if (mSchedules[i].type == ScheduleType.FIGHTING) {
+                    return mSchedules[i]
+                }
+            }
+        }
+        return null
     }
 }

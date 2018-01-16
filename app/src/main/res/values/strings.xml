@@ -16,4 +16,6 @@
     <string name="status_rest_now">REST NOW</string>
     <string name="status_pause">PAUSE</string>
     <string name="status_get_ready">GET READY</string>
+
+    <string name="tv_no_event">没有训练项目</string>
 </resources>

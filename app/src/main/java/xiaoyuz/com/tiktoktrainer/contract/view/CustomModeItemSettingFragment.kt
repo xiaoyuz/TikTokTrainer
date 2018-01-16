@@ -57,7 +57,7 @@ class CustomModeItemSettingFragment(private val mPresenter: CustomModeListContra
         val schedules = mutableListOf<TrainingSchedule>()
         for (i in 0..count.value - 1) {
             schedules.add(TrainingSchedule(mode = Mode.COUNT_MODE, type = ScheduleType.FIGHTING,
-                    count = roundCount, perTime = perTime, name = "${itemName.text}  $roundCount"))
+                    count = roundCount, perTime = perTime, name = "${itemName.text}"))
             schedules.add(TrainingSchedule(mode = Mode.TIME_MODE, type = ScheduleType.REST,
                     time = restTime, name = "Rest!"))
         }
